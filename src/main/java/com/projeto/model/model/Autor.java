@@ -1,19 +1,28 @@
 package com.projeto.model.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
 @Table(name = "TAB_AUTOR")
-public class Autor {
-	
+public class Autor implements Serializable{
+
+
+	private static final long serialVersionUID = -8678632461861092004L;
 
 	private Integer id;
 	private String  nome;
@@ -21,12 +30,20 @@ public class Autor {
 	private String  bairro;
 	private String  cidade;
 	private String  cep;
-	//private Date    dataNascimento;
+	private Date    dataNascimento;
 	private String  cpf;
 	private String  rg;
 	private String  sexo; 
 	private String  telefoneFixo;
 	private String  telefoneCelular;
+	
+	private Editora editora;
+	
+	
+	//private List<Livro> listaLivros;
+	
+	
+	private List<AutorLivro> listaAutoresLivros;
 	
 	public Autor() {
 	}
@@ -83,13 +100,15 @@ public class Autor {
 		this.cep = cep;
 	}
 	
-	//public Date getDataNascimento() {
-	//	return dataNascimento;
-	//}
+	@Temporal(TemporalType.DATE)
+	@Column(name="AUTOR_DATA_NASCIMENTO", nullable = false)
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
 	
-	//public void setDataNascimento(Date dataNascimento) {
-	//	this.dataNascimento = dataNascimento;
-	//}
+	public void setDataNascimento(Date dataNascimento) {
+	   this.dataNascimento = dataNascimento;
+	}
 	
 	@Column(name="AUTOR_CPF", length = 20, nullable = false)
 	public String getCpf() {
@@ -133,6 +152,40 @@ public class Autor {
 	public void setTelefoneCelular(String telefoneCelular) {
 		this.telefoneCelular = telefoneCelular;
 	}
+	
+	
+	
+
+//    @ManyToMany(mappedBy = "listaAutores")
+//    public List<Livro> getListaLivros() {
+//		return listaLivros;
+//	}
+//
+//
+//	public void setListaLivros(List<Livro> listaLivros) {
+//		this.listaLivros = listaLivros;
+//	}
+
+    @ManyToOne
+    @JoinColumn(name = "EDITORA_ID", nullable = false)
+	public Editora getEditora() {
+		return editora;
+	}
+
+
+	public void setEditora(Editora editora) {
+		this.editora = editora;
+	}
+
+	@OneToMany(mappedBy = "autor")
+	public List<AutorLivro> getListaAutoresLivros() {
+		return listaAutoresLivros;
+	}
+
+
+	public void setListaAutoresLivros(List<AutorLivro> listaAutoresLivros) {
+		this.listaAutoresLivros = listaAutoresLivros;
+	}
 
 
 	@Override
@@ -165,9 +218,13 @@ public class Autor {
 	@Override
 	public String toString() {
 		return "Autor [id=" + id + ", nome=" + nome + ", rua=" + rua + ", bairro=" + bairro + ", cidade=" + cidade
-				+ ", cep=" + cep + ", cpf=" + cpf + ", rg=" + rg + ", sexo=" + sexo + ", telefoneFixo=" + telefoneFixo
-				+ ", telefoneCelular=" + telefoneCelular + "]";
+				+ ", cep=" + cep + ", dataNascimento=" + dataNascimento + ", cpf=" + cpf + ", rg=" + rg + ", sexo="
+				+ sexo + ", telefoneFixo=" + telefoneFixo + ", telefoneCelular=" + telefoneCelular
+				+ ", listaAutoresLivros=" + listaAutoresLivros + "]";
 	}
+
+
+	
 
 
 	

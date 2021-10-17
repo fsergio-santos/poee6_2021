@@ -2,15 +2,12 @@ package com.projeto.main;
 
 import java.awt.EventQueue;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
+import com.projeto.menu.MenuPrincipal;
 import com.projeto.model.service.AutorService;
-import com.projeto.view.autor.AutorFrame;
 
 public class Projeto extends JFrame {
 
@@ -18,8 +15,6 @@ public class Projeto extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nomeTextField;
-	
-	private AutorService autorService = new AutorService();
 	
 	/**
 	 * Launch the application.
@@ -29,7 +24,7 @@ public class Projeto extends JFrame {
 			public void run() {
 				try {
 					Projeto frame = new Projeto();
-					frame.setVisible(true);
+	
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,19 +43,38 @@ public class Projeto extends JFrame {
 		//setContentPane(contentPane);
 		//contentPane.setLayout(null);
 		initComponents();
-		createEvents();
+		//createEvents();
 		
 	}
 
-	private void createEvents() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	private void initComponents() {
-		AutorFrame autorFrame = new AutorFrame();
-		autorFrame.setVisible(true);
+		//AutorFrame autorFrame = new AutorFrame();
+		//autorFrame.setVisible(true);
 		
+		MenuPrincipal menu = new MenuPrincipal();
+		menu.setLocationRelativeTo(null);
+		menu.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		menu.setVisible(true);
+		
+		
+	}
+
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+
+	public void setContentPane(JPanel contentPane) {
+		this.contentPane = contentPane;
+	}
+
+	public JTextField getNomeTextField() {
+		return nomeTextField;
+	}
+
+	public void setNomeTextField(JTextField nomeTextField) {
+		this.nomeTextField = nomeTextField;
 	}
 
 

@@ -1,5 +1,6 @@
 package com.projeto.model.service;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.EntityManager;
@@ -112,5 +113,27 @@ public class AutorService {
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
+
+
+	public Integer countTotalRegistroAutores() {
+		return autorDao.countTotalRegistrosAutores();
+	}
+
+
+	public List<Autor> carregarListaAutor(Integer paginaAtual, Integer registrosPorPagina) {
+		return autorDao.listaAutorPorPaginacao(paginaAtual, registrosPorPagina);
+	}
+
+
+	public List<Autor> carregarListaAutor(String buscarNomeAutor) {
+		return autorDao.carregarListaAutor(buscarNomeAutor);
+		
+	}
+
+
+	public List<Autor> carregaListaAutor() {
+		return autorDao.carregaListaAutor();
+	}
+
 
 }
