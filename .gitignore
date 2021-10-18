@@ -1,0 +1,8 @@
+
+target/ 
+.metadata/
+.settings/
+.sts4-cache/
+src/main/java/com/projeto/estrutura/imagens/
+.classpath
+.project
